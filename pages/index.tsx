@@ -1,58 +1,12 @@
-import { Button, Flex, Heading, Grid, Text, Box } from "@chakra-ui/react";
+import { Button, Flex, Heading, Grid, Text } from "@chakra-ui/react";
 import { Fragment } from "react";
+import names from "../constants/names";
 
-const leaderboardData = [
-  {
-    id: 34897,
-    name: "John Doe",
-    points: 9999,
-  },
-  {
-    id: 4563452,
-    name: "James Robert",
-    points: 23442,
-  },
-  {
-    id: 3567212345,
-    name: "Michael John",
-    points: 3453,
-  },
-  {
-    id: 45,
-    name: "Joseph Richard",
-    points: 2345,
-  },
-  {
-    id: 4321,
-    name: "Charles Benjamin",
-    points: 1,
-  },
-  {
-    id: 123456,
-    name: "Abe Lincoln",
-    points: 234565,
-  },
-  {
-    id: 111,
-    name: "George Washington",
-    points: 123411,
-  },
-  {
-    id: 222,
-    name: "Lebron James",
-    points: 657365756,
-  },
-  {
-    id: 333,
-    name: "John Smith",
-    points: 2345,
-  },
-  {
-    id: 444,
-    name: "Alexander Hamilton",
-    points: 44,
-  },
-];
+const leaderboardData = new Array(100).fill(0).map((_, idx) => ({
+  id: Math.round(Math.random() * 10000),
+  name: names[idx],
+  points: Math.round(Math.random() * 100000),
+}));
 
 export default function Home() {
   return (
@@ -77,7 +31,6 @@ export default function Home() {
             </Fragment>
           ))}
       </Grid>
-      <Flex margin="auto"></Flex>
     </>
   );
 }
