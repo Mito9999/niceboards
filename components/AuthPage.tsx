@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useAuth } from "../utils/auth";
 import { emailRegex } from "../utils/contants";
 import { firebaseAuthCodeToText } from "../utils/functions";
+import { useRouter } from "next/router";
 
 type Props = {
   type: "SignIn" | "SignUp";
@@ -21,6 +22,7 @@ type Props = {
 
 export default function AuthPage({ type }: Props) {
   const auth = useAuth();
+  const router = useRouter();
 
   const [message, setMessage] = useState<{
     type: "info" | "warning" | "success" | "error";
@@ -55,6 +57,7 @@ export default function AuthPage({ type }: Props) {
             type: "info",
             text: "",
           });
+          router.push("/profile");
         } catch (err) {
           setMessage({
             type: "error",
@@ -71,6 +74,7 @@ export default function AuthPage({ type }: Props) {
           type: "info",
           text: "",
         });
+        router.push("/profile");
       } catch (err) {
         setMessage({
           type: "error",
