@@ -6,27 +6,64 @@ import {
   FormLabel,
   Button,
   Text,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { useAuth } from "../utils/auth";
 import { useState } from "react";
 import Link from "next/link";
+import { emailRegex } from "../utils/contants";
 
 type Props = {
   type: "SignIn" | "SignUp";
 };
 
-export default function SignIn({ type }: Props) {
+export default function AuthPage({ type }: Props) {
   const auth = useAuth();
-  console.log(auth);
 
+  const [message, setMessage] = useState<{
+    type: "info" | "warning" | "success" | "error";
+    text: string;
+  }>({
+    type: "info",
+    text: "",
+  });
+  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
 
-  const handleSignUp = () => {
-    if (password === passwordConfirmation) {
-      auth.signup(email, password);
+  const handleSubmit = async () => {
+    if (!emailRegex.test(email)) {
+      setMessage({ type: "warning", text: "Invalid Email Address" });
+      return;
+    } else if (password.length < 8) {
+      setMessage({
+        type: "warning",
+        text: "Password must be at least 8 characters",
+      });
+      return;
     }
+
+    setLoading(true);
+    if (type === "SignUp") {
+      if (password === passwordConfirmation) {
+        try {
+          await auth.signup(email, password);
+        } catch {
+          setMessage({ type: "error", text: "Unable to Sign Up" });
+        }
+      } else {
+        setMessage({ type: "warning", text: "Passwords do not match" });
+      }
+    } else if (type === "SignIn") {
+      try {
+        await auth.signin(email, password);
+      } catch {
+        setMessage({ type: "error", text: "Unable to Sign In" });
+      }
+    }
+    setLoading(false);
   };
 
   return (
@@ -37,9 +74,15 @@ export default function SignIn({ type }: Props) {
       height="calc(100vh - 83px)"
     >
       <Box w="500px" bgColor="gray.50" p="12" borderRadius="8" m="auto">
-        <Heading size="md" textAlign="center">
+        <Heading size="lg" textAlign="center">
           {type === "SignUp" ? "Sign Up" : "Sign In"}
         </Heading>
+        {message.text.length > 0 && (
+          <Alert status={message.type} mt="4">
+            <AlertIcon />
+            {message.text}
+          </Alert>
+        )}
         <FormControl id="email" mt="4">
           <FormLabel>Email</FormLabel>
           <Input
@@ -70,15 +113,14 @@ export default function SignIn({ type }: Props) {
           colorScheme="red"
           my="8"
           w="100%"
-          onClick={() =>
-            type === "SignUp" ? handleSignUp() : auth.signin(email, password)
-          }
+          onClick={handleSubmit}
+          isLoading={loading}
         >
           {type === "SignUp" ? "Sign Up" : "Sign In"}
         </Button>
         <Link href={`/${type === "SignUp" ? "signin" : "signup"}`}>
           <Text>
-            Already have an account?{" "}
+            {type === "SignUp" ? "Already" : "Don't"} have an account?{" "}
             <Text
               as="span"
               cursor="pointer"
