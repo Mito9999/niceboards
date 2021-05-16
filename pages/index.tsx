@@ -15,6 +15,7 @@ export default function Home() {
 
   return (
     <>
+      <Heading size="lg">The nicest leaderboards you've ever seen</Heading>
       <Grid margin="auto" templateColumns="50px auto 100px">
         <Heading size="md">#</Heading>
         <Heading size="md">Name</Heading>
