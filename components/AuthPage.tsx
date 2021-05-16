@@ -52,7 +52,13 @@ export default function AuthPage({ type }: Props) {
     if (type === "SignUp") {
       if (password === passwordConfirmation) {
         try {
-          await auth.signup(email, password);
+          await auth
+            .signup(email, password)
+            .then(
+              (user) =>
+                !user.displayName &&
+                user.updateProfile({ displayName: email.split("@")[0] })
+            );
           setMessage({
             type: "info",
             text: "",

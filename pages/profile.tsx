@@ -1,16 +1,18 @@
 import {
-  Heading,
-  Table,
-  Tbody,
-  Tr,
-  Td,
+  Box,
   Button,
   Flex,
+  Heading,
+  Input,
+  Table,
+  Tbody,
+  Td,
   Text,
+  Tr,
 } from "@chakra-ui/react";
-import { useAuth } from "../utils/auth";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useAuth } from "../utils/auth";
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -19,6 +21,9 @@ export default function Home() {
   const router = useRouter();
   const auth = useAuth();
   console.log(auth.user);
+
+  const [newNameValue, setNewNameValue] = useState<string>("");
+  const [isNameEditable, setIsNameEditable] = useState<boolean>(false);
 
   return (
     <>
@@ -44,10 +49,45 @@ export default function Home() {
                 <Td>Name</Td>
                 <Td>
                   <Flex justify="space-between">
-                    <Text>{auth.user.displayName || "Guest"}</Text>
-                    <Button colorScheme="red" variant="link">
-                      Edit
-                    </Button>
+                    <Text>
+                      {isNameEditable ? (
+                        <Input
+                          placeholder={auth.user.displayName}
+                          value={newNameValue}
+                          onChange={(e) => setNewNameValue(e.target.value)}
+                        />
+                      ) : (
+                        <Text>{auth.user.displayName || "Guest"}</Text>
+                      )}
+                    </Text>
+                    <Flex align="center">
+                      {isNameEditable && (
+                        <Button
+                          mx="8"
+                          colorScheme="red"
+                          variant="link"
+                          onClick={async () => {
+                            if (newNameValue.length > 0) {
+                              await auth.user.updateProfile({
+                                displayName: newNameValue,
+                              });
+                            }
+                            setIsNameEditable((prev) => !prev);
+                          }}
+                        >
+                          Done
+                        </Button>
+                      )}
+                      <Button
+                        colorScheme="red"
+                        variant="link"
+                        onClick={() => {
+                          setIsNameEditable((prev) => !prev);
+                        }}
+                      >
+                        {isNameEditable ? "Cancel" : "Edit"}
+                      </Button>
+                    </Flex>
                   </Flex>
                 </Td>
               </Tr>
