@@ -50,8 +50,16 @@ export default function AuthPage({ type }: Props) {
       if (password === passwordConfirmation) {
         try {
           await auth.signup(email, password);
-        } catch {
-          setMessage({ type: "error", text: "Unable to Sign Up" });
+          setMessage({
+            type: "info",
+            text: "",
+          });
+        } catch (err) {
+          if (err.code === "auth/email-already-in-use") {
+            setMessage({ type: "error", text: "Account already exists" });
+          } else {
+            setMessage({ type: "error", text: "Unable to Sign Up" });
+          }
         }
       } else {
         setMessage({ type: "warning", text: "Passwords do not match" });
@@ -59,8 +67,20 @@ export default function AuthPage({ type }: Props) {
     } else if (type === "SignIn") {
       try {
         await auth.signin(email, password);
-      } catch {
-        setMessage({ type: "error", text: "Unable to Sign In" });
+        setMessage({
+          type: "info",
+          text: "",
+        });
+      } catch (err) {
+        if (err.code === "auth/user-not-found") {
+          setMessage({ type: "error", text: "User not found" });
+        } else if (err.code === "auth/wrong-password") {
+          setMessage({ type: "error", text: "Incorrect password" });
+        } else if (err.code === "auth/invalid-email") {
+          setMessage({ type: "error", text: "Invalid email" });
+        } else {
+          setMessage({ type: "error", text: "Unable to Sign In" });
+        }
       }
     }
     setLoading(false);
