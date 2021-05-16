@@ -13,6 +13,7 @@ import { useAuth } from "../utils/auth";
 import { useState } from "react";
 import Link from "next/link";
 import { emailRegex } from "../utils/contants";
+import { firebaseAuthCodeToText } from "../utils/functions";
 
 type Props = {
   type: "SignIn" | "SignUp";
@@ -55,11 +56,10 @@ export default function AuthPage({ type }: Props) {
             text: "",
           });
         } catch (err) {
-          if (err.code === "auth/email-already-in-use") {
-            setMessage({ type: "error", text: "Account already exists" });
-          } else {
-            setMessage({ type: "error", text: "Unable to Sign Up" });
-          }
+          setMessage({
+            type: "error",
+            text: firebaseAuthCodeToText(err.code, type),
+          });
         }
       } else {
         setMessage({ type: "warning", text: "Passwords do not match" });
@@ -72,15 +72,10 @@ export default function AuthPage({ type }: Props) {
           text: "",
         });
       } catch (err) {
-        if (err.code === "auth/user-not-found") {
-          setMessage({ type: "error", text: "User not found" });
-        } else if (err.code === "auth/wrong-password") {
-          setMessage({ type: "error", text: "Incorrect password" });
-        } else if (err.code === "auth/invalid-email") {
-          setMessage({ type: "error", text: "Invalid email" });
-        } else {
-          setMessage({ type: "error", text: "Unable to Sign In" });
-        }
+        setMessage({
+          type: "error",
+          text: firebaseAuthCodeToText(err.code, type),
+        });
       }
     }
     setLoading(false);
