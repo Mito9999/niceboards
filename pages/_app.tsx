@@ -8,6 +8,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Head from "next/head";
+import Link from "next/link";
 import { ProvideAuth } from "../utils/auth";
 
 const theme = extendTheme({
@@ -32,12 +33,16 @@ export default function MyApp({ Component, pageProps }) {
       <ProvideAuth>
         <Container maxW="800px">
           <Flex align="center" justify="space-between" my="20px">
-            <Heading>Leaderboard</Heading>
+            <Link href="/">
+              <Heading cursor="pointer">Leaderboard</Heading>
+            </Link>
             <Box>
               <Button colorScheme="blue" mr="4">
                 Create
               </Button>
-              <Button colorScheme="red">Sign In</Button>
+              <Link href="/signin">
+                <Button colorScheme="red">Sign In</Button>
+              </Link>
             </Box>
           </Flex>
           <Component {...pageProps} />
