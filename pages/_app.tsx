@@ -16,6 +16,13 @@ const theme = extendTheme({
     heading: "Inter",
     body: "Inter",
   },
+  styles: {
+    global: {
+      html: {
+        overflowY: "scroll",
+      },
+    },
+  },
 });
 
 export default function MyApp({ Component, pageProps }) {
