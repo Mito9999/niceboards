@@ -1,16 +1,7 @@
-import {
-  Box,
-  Button,
-  ChakraProvider,
-  Container,
-  extendTheme,
-  Flex,
-  Heading,
-} from "@chakra-ui/react";
+import { ChakraProvider, Container, extendTheme } from "@chakra-ui/react";
 import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
 import { ProvideAuth } from "../utils/auth";
+import Navbar from "../components/Navbar";
 
 const theme = extendTheme({
   fonts: {
@@ -37,29 +28,15 @@ export default function MyApp({ Component, pageProps }) {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap"
           rel="stylesheet"
         />
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="apple-mobile-web-app-status-bar" content="#1a202c" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/logo_96x96.png" />
       </Head>
       <ProvideAuth>
         <Container maxW="800px">
-          <Flex
-            align="center"
-            direction={["column", "row"]}
-            justify="space-between"
-            my="20px"
-          >
-            <Link href="/">
-              <Heading cursor="pointer" mb={["4", "0"]}>
-                <Image src="/logo.svg" width={583 / 8} height={364 / 8} />
-              </Heading>
-            </Link>
-            <Box>
-              <Button colorScheme="blue" mr="4">
-                Create
-              </Button>
-              <Link href="/signin">
-                <Button colorScheme="red">Sign In</Button>
-              </Link>
-            </Box>
-          </Flex>
+          <Navbar />
           <Component {...pageProps} />
         </Container>
       </ProvideAuth>
