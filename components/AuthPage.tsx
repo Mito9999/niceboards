@@ -1,17 +1,17 @@
 import {
-  Box,
-  Heading,
-  Input,
-  FormControl,
-  FormLabel,
-  Button,
-  Text,
   Alert,
   AlertIcon,
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Text,
 } from "@chakra-ui/react";
-import { useAuth } from "../utils/auth";
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
+import { useAuth } from "../utils/auth";
 import { emailRegex } from "../utils/contants";
 import { firebaseAuthCodeToText } from "../utils/functions";
 
@@ -88,7 +88,14 @@ export default function AuthPage({ type }: Props) {
       align="center"
       height="calc(100vh - 83px)"
     >
-      <Box w="500px" bgColor="gray.50" p="12" borderRadius="8" m="auto">
+      <Box
+        w="500px"
+        bgColor="gray.50"
+        px={["4", "12"]}
+        py={["8", "12"]}
+        borderRadius="8"
+        m="auto"
+      >
         <Heading size="lg" textAlign="center">
           {type === "SignUp" ? "Sign Up" : "Sign In"}
         </Heading>

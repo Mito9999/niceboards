@@ -1,7 +1,7 @@
-import { Heading, Grid, Text } from "@chakra-ui/react";
+import { Grid, Heading, Text } from "@chakra-ui/react";
 import { Fragment } from "react";
-import { names } from "../utils/contants";
 import { useAuth } from "../utils/auth";
+import { names } from "../utils/contants";
 
 const leaderboardData = new Array(100).fill(0).map((_, idx) => ({
   id: idx.toString() + Math.round(Math.random() * 10000),

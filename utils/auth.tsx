@@ -1,7 +1,7 @@
 // https://usehooks.com/useAuth
-import React, { useState, useEffect, useContext, createContext } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({

@@ -1,9 +1,9 @@
 import {
-  ChakraProvider,
-  extendTheme,
-  Container,
   Box,
   Button,
+  ChakraProvider,
+  Container,
+  extendTheme,
   Flex,
   Heading,
 } from "@chakra-ui/react";
@@ -39,9 +39,16 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <ProvideAuth>
         <Container maxW="800px">
-          <Flex align="center" justify="space-between" my="20px">
+          <Flex
+            align="center"
+            direction={["column", "row"]}
+            justify="space-between"
+            my="20px"
+          >
             <Link href="/">
-              <Heading cursor="pointer">Leaderboard</Heading>
+              <Heading cursor="pointer" mb={["4", "0"]}>
+                Leaderboard
+              </Heading>
             </Link>
             <Box>
               <Button colorScheme="blue" mr="4">
