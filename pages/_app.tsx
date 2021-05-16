@@ -1,6 +1,6 @@
 import { ChakraProvider, extendTheme, Container } from "@chakra-ui/react";
 import Head from "next/head";
-import { ProvideAuth } from "../auth/use-auth";
+import { ProvideAuth } from "../utils/auth";
 
 const theme = extendTheme({
   fonts: {

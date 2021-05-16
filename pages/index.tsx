@@ -1,7 +1,7 @@
 import { Button, Flex, Heading, Grid, Text, Box } from "@chakra-ui/react";
 import { Fragment } from "react";
-import names from "../constants/names";
-import { useAuth } from "../auth/use-auth";
+import { names } from "../utils/contants";
+import { useAuth } from "../utils/auth";
 
 const leaderboardData = new Array(100).fill(0).map((_, idx) => ({
   id: Math.round(Math.random() * 10000),
