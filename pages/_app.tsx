@@ -29,7 +29,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
       <Head>
-        <title>Leaderboard</title>
+        <title>Niceboards</title>
         <meta name="description" content="Real time leaderboards" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -47,7 +47,7 @@ export default function MyApp({ Component, pageProps }) {
           >
             <Link href="/">
               <Heading cursor="pointer" mb={["4", "0"]}>
-                Leaderboard
+                Niceboards
               </Heading>
             </Link>
             <Box>
