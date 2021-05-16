@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { ProvideAuth } from "../utils/auth";
 
 const theme = extendTheme({
@@ -47,7 +48,7 @@ export default function MyApp({ Component, pageProps }) {
           >
             <Link href="/">
               <Heading cursor="pointer" mb={["4", "0"]}>
-                Niceboards
+                <Image src="/logo.svg" width={583 / 8} height={364 / 8} />
               </Heading>
             </Link>
             <Box>
