@@ -15,7 +15,7 @@ export default function Navbar() {
     >
       <Link href="/">
         <Heading cursor="pointer" mb={["4", "0"]}>
-          <Image src="/logo.svg" width={583 / 8} height={364 / 8} />
+          <Image src="/logo.svg" width={583 / 10} height={364 / 10} />
         </Heading>
       </Link>
       <Box>

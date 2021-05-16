@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Flex,
   Heading,
@@ -49,17 +48,15 @@ export default function Home() {
                 <Td>Name</Td>
                 <Td>
                   <Flex justify="space-between">
-                    <Text>
-                      {isNameEditable ? (
-                        <Input
-                          placeholder={auth.user.displayName}
-                          value={newNameValue}
-                          onChange={(e) => setNewNameValue(e.target.value)}
-                        />
-                      ) : (
-                        <Text>{auth.user.displayName || "Guest"}</Text>
-                      )}
-                    </Text>
+                    {isNameEditable ? (
+                      <Input
+                        placeholder={auth.user.displayName}
+                        value={newNameValue}
+                        onChange={(e) => setNewNameValue(e.target.value)}
+                      />
+                    ) : (
+                      <Text>{auth.user.displayName || "Guest"}</Text>
+                    )}
                     <Flex align="center">
                       {isNameEditable && (
                         <Button
