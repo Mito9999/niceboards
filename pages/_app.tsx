@@ -1,4 +1,12 @@
-import { ChakraProvider, extendTheme, Container } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  extendTheme,
+  Container,
+  Box,
+  Button,
+  Flex,
+  Heading,
+} from "@chakra-ui/react";
 import Head from "next/head";
 import { ProvideAuth } from "../utils/auth";
 
@@ -23,6 +31,15 @@ export default function MyApp({ Component, pageProps }) {
       </Head>
       <ProvideAuth>
         <Container maxW="800px">
+          <Flex align="center" justify="space-between" my="20px">
+            <Heading>Leaderboard</Heading>
+            <Box>
+              <Button colorScheme="blue" mr="4">
+                Create
+              </Button>
+              <Button colorScheme="red">Sign In</Button>
+            </Box>
+          </Flex>
           <Component {...pageProps} />
         </Container>
       </ProvideAuth>
