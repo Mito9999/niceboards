@@ -21,7 +21,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "auth/use-auth.ts"
   ],
   "exclude": [
     "node_modules"

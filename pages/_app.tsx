@@ -1,5 +1,6 @@
 import { ChakraProvider, extendTheme, Container } from "@chakra-ui/react";
 import Head from "next/head";
+import { ProvideAuth } from "../auth/use-auth";
 
 const theme = extendTheme({
   fonts: {
@@ -20,9 +21,11 @@ export default function MyApp({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <Container maxW="800px">
-        <Component {...pageProps} />
-      </Container>
+      <ProvideAuth>
+        <Container maxW="800px">
+          <Component {...pageProps} />
+        </Container>
+      </ProvideAuth>
     </ChakraProvider>
   );
 }
